@@ -76,9 +76,9 @@ object AdventOfCode1 extends App {
 
   println(partA)
 
-  val positionsInVisitingOrder =  positions.reverse
+  val positionsInVisitingOrder = positions.reverse
 
-  var visitedTwice = positionsInVisitingOrder.find(e => positionsInVisitingOrder.filter(x => x == e ).size > 1).get
+  var visitedTwice = positionsInVisitingOrder.find(e => positionsInVisitingOrder.filter(x => x == e).size > 1).get
 
   val partB = taxicabDistance(initialPos, visitedTwice)
 
