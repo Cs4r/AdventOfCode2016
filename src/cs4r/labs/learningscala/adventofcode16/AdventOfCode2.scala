@@ -13,19 +13,18 @@ object AdventOfCode2 extends App {
 
   val movements = puzzleInput.split("\n").toList
 
-  def obtainCode(movements: List[String])(f: (Char, Char) => Char): String = {
+  def obtainCode(movements: List[String])(keypadDistribution: (Char, Char) => Char): String = {
     movements.foldLeft(('5', List[Char]()))((curr, acc) => {
-      val button = acc.foldLeft(curr._1)(f)
+      val button = acc.foldLeft(curr._1)(keypadDistribution)
       (button, button :: curr._2)
     })._2.reverse.mkString
   }
 
   def simpleKeyPad(current: Char, movement: Char): Char = current match {
     case '1' => movement match {
-      case 'U' => '1'
       case 'D' => '4'
-      case 'L' => '1'
       case 'R' => '2'
+      case _ => '1'
     }
 
     case '2' => movement match {
@@ -36,10 +35,9 @@ object AdventOfCode2 extends App {
     }
 
     case '3' => movement match {
-      case 'U' => '3'
       case 'D' => '6'
       case 'L' => '2'
-      case 'R' => '3'
+      case _ => '3'
     }
 
 
@@ -66,9 +64,8 @@ object AdventOfCode2 extends App {
 
     case '7' => movement match {
       case 'U' => '4'
-      case 'D' => '7'
-      case 'L' => '7'
       case 'R' => '8'
+      case _ => '7'
     }
 
     case '8' => movement match {
@@ -80,9 +77,8 @@ object AdventOfCode2 extends App {
 
     case '9' => movement match {
       case 'U' => '6'
-      case 'D' => '9'
       case 'L' => '8'
-      case 'R' => '9'
+      case _ => '9'
     }
 
   }
