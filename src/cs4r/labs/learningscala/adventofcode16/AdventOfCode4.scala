@@ -975,16 +975,16 @@ object AdventOfCode4 extends App {
     sector.toInt
   }
 
-  val decrypt : String => String = (input) => {
-    val roomPattern(name, sector, _) = input
-    name.split("-").map(w => w.map(rotate(_, sector.toInt))).mkString(" ")
-  }
-
   val rotate: ((Char, Int) => Char) = (c, n) => {
     val alphabet = "abcdefghijklmnopqrstuvwxyz"
     val index = c-97
     val nexIndex = (index + n) % 26
     alphabet(nexIndex)
+  }
+
+  val decrypt : String => String = (input) => {
+    val roomPattern(name, sector, _) = input
+    name.split("-").map(w => w.map(rotate(_, sector.toInt))).mkString(" ")
   }
 
   val realRoom : (String) => Boolean = (input) => {
@@ -997,9 +997,7 @@ object AdventOfCode4 extends App {
 
   val realRooms: Array[String] = rooms.filter(realRoom)
 
-  val partA = realRooms.map(r => {
-    sectorId(r)
-  }).sum
+  val partA = realRooms.map(sectorId).sum
 
   println(partA)
 
