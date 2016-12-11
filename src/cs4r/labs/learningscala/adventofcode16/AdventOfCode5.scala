@@ -30,29 +30,32 @@ object AdventOfCode5 extends App {
 
   val hashes = Stream.from(1).map(e => md5(puzzleInput + e)).filter(startWithFiveZeros(_)).map(arrayToString)
 
-  val partA  = hashes.take(8).map(_(5)).mkString
+   val partA  = hashes.take(8).map(_(5)).mkString
 
-  println(partA)
+   println(partA)
 
-  var positions: Set[Int] = Set()
+  def hashWithValidPosition(hash: String) = {
+    val pos = hexDigitToInt(hash(5))
+    pos >= 0 && pos <= 7
+  }
 
+  def hexDigitToInt(c: Char) = {
+    Integer.parseInt(c.toString, 16)
+  }
 
-  // TODO: fix part B
-
-  val partB = hashes.filter(e => {
-      val pos = e(5).toInt
-      if(pos >=0 && pos <= 7) { print(pos); true }
-      else false
-  }).takeWhile(e => {
-    positions += e(5).toInt
-    positions.size < 8
-  }).foldLeft(Array.fill(8){'0'})( (acc, curr) => {
-      val pos = curr(5).toInt
-      val char = curr(6)
-      acc(pos) = char
-      acc
+  val partB = hashes.filter(hashWithValidPosition).map(e => {
+    val pos = hexDigitToInt(e(5))
+    val char = e(6)
+    (pos, char)
+  }).take(25).foldLeft(Map[Int, Char]())((acc, curr) => {
+    if (!acc.contains(curr._1)) acc + curr
+    else acc
+  }).foldLeft(Array.fill(8) {'0'})((acc, curr) => {
+    val pos = curr._1
+    val char = curr._2
+    acc(pos) = char
+    acc
   }).mkString
 
   println(partB)
-
 }
