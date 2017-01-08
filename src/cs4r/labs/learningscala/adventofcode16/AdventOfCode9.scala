@@ -110,7 +110,7 @@ object AdventOfCode9 extends App {
   }
 
 
-  var partB = computeDecompressedLenght(puzzleInput)
+  var partB = computeDecompressedLegth(puzzleInput)
 
   println(partB)
 
