@@ -15,8 +15,6 @@ object AdventOfCode9 extends App {
   val markerPattern = """\((\d+)x(\d+)\)""".r
 
   def decompress(input: String): String = {
-
-
     var processingMarker = false
     var buffer = ""
 
@@ -67,7 +65,6 @@ object AdventOfCode9 extends App {
   /* Part B */
 
   def computeDecompressedLegth(input: String): Long = {
-
     var length = 0L
     val weights = List.fill(input.length)(List(1)).flatten.toArray
 
@@ -88,7 +85,7 @@ object AdventOfCode9 extends App {
           if (buffer.matches(markerPattern.regex)) {
             val markerPattern(take, times) = buffer
 
-            for (j <- i + 1 until i+1+take.toInt) {
+            for (j <- i + 1 until i + 1 + take.toInt) {
               weights(j) *= times.toInt
             }
 
@@ -101,9 +98,7 @@ object AdventOfCode9 extends App {
         length += weights(i)
       }
 
-
       i += 1
-
     }
 
     length
