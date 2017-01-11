@@ -60,7 +60,7 @@ object AdventOfCode10 extends App {
 
   val OUTPUT_TOKEN: String = "output"
 
-  // TODO: Make more functional...
+  // TODO: Do this in a more functional way...
   val bots = scala.collection.mutable.HashMap.empty[Int, Bot]
 
   val outputs = scala.collection.mutable.HashMap.empty[Int, Output]
